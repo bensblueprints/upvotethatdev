@@ -13,6 +13,7 @@ import { Server, Shield, Globe, Clock, CheckCircle2, Loader2, MapPin } from 'luc
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
+import { MyProxyOrders } from '@/components/MyProxyOrders';
 
 interface ProxyPlan {
   id: string;
@@ -147,10 +148,42 @@ export const OrderProxies = () => {
 
       if (transactionError) throw transactionError;
 
-      toast({
-        title: "Proxy Order Placed!",
-        description: `Your ${selectedPlan.name} order is being processed. You'll receive your proxy details shortly.`,
-      });
+      // Call serverless function to purchase proxies from ProxyCheap
+      try {
+        const purchaseResponse = await fetch('/.netlify/functions/purchase-proxy', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            orderId: proxyOrder.id,
+            planType: selectedPlan.type,
+            country: selectedCountry,
+            bandwidth: selectedPlan.bandwidth,
+            quantity: quantity,
+          }),
+        });
+
+        if (!purchaseResponse.ok) {
+          const errorData = await purchaseResponse.json();
+          throw new Error(errorData.error || 'Failed to purchase proxies');
+        }
+
+        const purchaseData = await purchaseResponse.json();
+
+        toast({
+          title: "Proxies Activated!",
+          description: `Your ${selectedPlan.name} proxies are now active and ready to use. Check your order details for credentials.`,
+        });
+
+      } catch (purchaseError: any) {
+        console.error('Proxy purchase error:', purchaseError);
+        toast({
+          title: "Order Created - Activation Pending",
+          description: `Your order was created but proxy activation failed: ${purchaseError.message}. Our team will process it manually.`,
+          variant: "default"
+        });
+      }
 
       // Reset form
       setSelectedPlan(null);
@@ -378,6 +411,10 @@ export const OrderProxies = () => {
           </div>
         </CardContent>
       </Card>
+
+      <div className="mt-8">
+        <MyProxyOrders />
+      </div>
     </div>
   );
 };
