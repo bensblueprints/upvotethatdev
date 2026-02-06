@@ -31,5 +31,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-*.md
-*.sqlsupabase/supabase
+*.sql
+supabase/supabase
