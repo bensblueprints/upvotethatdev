@@ -4,6 +4,7 @@ import { Dashboard } from '@/components/Dashboard';
 import { OrderUpvotes } from '@/components/OrderUpvotes';
 import { OrderComments, CommentOrderTracking } from '@/components/OrderComments';
 import { OrderTracking } from '@/components/OrderTracking';
+import { OrderProxies } from '@/components/OrderProxies';
 import { AddFunds } from '@/components/AddFunds';
 import { Account } from '@/components/Account';
 import { Support } from '@/components/Support';
@@ -119,6 +120,8 @@ const Index = () => {
         return <OrderUpvotes />;
       case 'order-comments':
         return <OrderComments />;
+      case 'order-proxies':
+        return <OrderProxies />;
       case 'track-upvote-orders':
         return <OrderTracking />;
       case 'track-comment-orders':

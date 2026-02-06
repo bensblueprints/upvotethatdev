@@ -1,9 +1,9 @@
 import { cn } from '@/lib/utils';
-import { 
-  LayoutDashboard, 
-  TrendingUp, 
-  MessageSquare, 
-  ClipboardList, 
+import {
+  LayoutDashboard,
+  TrendingUp,
+  MessageSquare,
+  ClipboardList,
   User,
   LogOut,
   Plus,
@@ -16,7 +16,8 @@ import {
   ChevronRight,
   Receipt,
   HelpCircle,
-  Link as LinkIcon
+  Link as LinkIcon,
+  Server
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -75,6 +76,7 @@ export const Sidebar = ({ activeTab, setActiveTab }: SidebarProps) => {
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { id: 'order-upvotes', label: 'Order Upvotes', icon: TrendingUp },
     { id: 'order-comments', label: 'Order Comments', icon: MessageSquare },
+    { id: 'order-proxies', label: 'Order Proxies', icon: Server },
     { id: 'buy-accounts', label: 'Buy Accounts', icon: ShoppingBag },
     { id: 'my-purchases', label: 'My Purchases', icon: KeyRound },
     { id: 'add-funds', label: 'Add Funds', icon: Plus },
