@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RedditTraffic.XYZ - Link in Bio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d0d0d;
+            color: #fff;
+        }
+        .pill-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 480px;
+            margin: 0.75rem auto;
+            padding: 1.25rem 2rem;
+            border-radius: 9999px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #FF4500 0%, #FF8717 100%);
+            color: #fff;
+            box-shadow: 0 4px 24px 0 rgba(255, 69, 0, 0.15);
+            border: none;
+            transition: transform 0.2s cubic-bezier(.36,1.56,.64,1), box-shadow 0.2s, background 0.2s;
+            cursor: pointer;
+            text-decoration: none;
+            letter-spacing: 0.01em;
+            position: relative;
+            overflow: hidden;
+        }
+        .pill-link:hover {
+            animation: wobble 0.5s;
+            background: linear-gradient(90deg, #FF8717 0%, #FF4500 100%);
+            box-shadow: 0 8px 32px 0 rgba(255, 69, 0, 0.25);
+        }
+        @keyframes wobble {
+            0% { transform: scale(1, 1); }
+            15% { transform: scale(0.95, 1.05) rotate(-2deg); }
+            30% { transform: scale(1.05, 0.95) rotate(2deg); }
+            45% { transform: scale(0.97, 1.03) rotate(-1deg); }
+            60% { transform: scale(1.03, 0.97) rotate(1deg); }
+            75% { transform: scale(0.99, 1.01) rotate(0deg); }
+            100% { transform: scale(1, 1); }
+        }
+        .pill-link:active {
+            transform: scale(0.97);
+        }
+        .video-container {
+            width: 100%;
+            max-width: 480px;
+            margin: 2rem auto 1.5rem auto;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 4px 32px 0 rgba(0,0,0,0.25);
+        }
+        .logo-glow {
+            filter: drop-shadow(0 0 16px #FF4500);
+        }
+        .lang-selector {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        .lang-btn {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: transform 0.15s;
+        }
+        .lang-btn.selected {
+            transform: scale(1.2);
+            filter: drop-shadow(0 0 6px #FF4500);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-start py-10">
+    <!-- Language Selector -->
+    <div class="lang-selector">
+        <button class="lang-btn selected" data-lang="en" title="English">🇺🇸</button>
+        <button class="lang-btn" data-lang="zh" title="中文">🇨🇳</button>
+        <button class="lang-btn" data-lang="ru" title="Русский">🇷🇺</button>
+        <button class="lang-btn" data-lang="vi" title="Tiếng Việt">🇻🇳</button>
+        <button class="lang-btn" data-lang="th" title="ไทย">🇹🇭</button>
+        <button class="lang-btn" data-lang="es" title="Español">🇪🇸</button>
+        <button class="lang-btn" data-lang="ar" title="العربية">🇸🇦</button>
+        <button class="lang-btn" data-lang="fa" title="فارسی">🇮🇷</button>
+        <button class="lang-btn" data-lang="tr" title="Türkçe">🇹🇷</button>
+        <button class="lang-btn" data-lang="fr" title="Français">🇫🇷</button>
+    </div>
+    <!-- Logo -->
+    <img src="img/ReDDIT UPVOTES.png" alt="RedditTraffic.XYZ Logo" class="h-20 mb-6 logo-glow">
+    <h1 id="main-title" class="text-3xl font-extrabold mb-4 text-center tracking-tight" style="color:#FF4500;">RedditTraffic.XYZ Links</h1>
+    <!-- Video Section -->
+    <div class="video-container">
+        <video controls poster="img/ReDDIT UPVOTES.png" width="100%" style="display:block; width:100%; height:auto; background:#000;">
+            <source src="video/Reddit Traffic XYZ Link Tree VIdeo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <!-- Pills -->
+    <div class="w-full flex flex-col items-center px-4">
+        <a id="link1" href="https://www.reddittraffic.xyz/auth" class="pill-link">🔥 Access Traffic Platform</a>
+        <a id="link3" href="#" class="pill-link">📕 Grab The Ebook: Be The Best Shill & Stop Losing Accounts</a>
+        <a id="link4" href="https://thesocialproxy.com/?ref=ben@rootaccess.design&campaign=linkinbio" class="pill-link">🛡️ Best Proxy Provider</a>
+        <a id="link5" href="#" class="pill-link">🧑‍💻 AdsPower Browser</a>
+        <a id="link6" href="#" class="pill-link">🤖 Reddit Strategy GPT (Custom Trained)</a>
+    </div>
+    <!-- Contact and Support Section -->
+    <div class="w-full flex flex-col items-center px-4 mt-8">
+        <h2 id="contact-header" class="text-2xl font-bold mb-4 text-blue-400">Contact & Support</h2>
+        <a id="link2" href="https://t.me/upvotethat" class="pill-link" style="background:linear-gradient(90deg,#0079D3 0%,#00BFFF 100%);color:#fff;">💬 Send Us A Message On Telegram</a>
+    </div>
+    <footer class="mt-10 text-gray-400 text-sm text-center">
+        &copy; 2025 RedditTraffic.XYZ. All rights reserved.
+    </footer>
+    <script>
+        const translations = {
+            en: {
+                title: 'RedditTraffic.XYZ Links',
+                link1: '🔥 Access Traffic Platform',
+                link2: '💬 Send Us A Message On Telegram',
+                link3: '📕 Grab The Ebook: Be The Best Shill & Stop Losing Accounts',
+                link4: '🛡️ Best Proxy Provider',
+                link5: '🧑‍💻 AdsPower Browser',
+                link6: '🤖 Reddit Strategy GPT (Custom Trained)',
+                contact: 'Contact & Support',
+            },
+            zh: {
+                title: 'RedditTraffic.XYZ 传送门',
+                link1: '🔥 访问流量平台',
+                link2: '💬 给我们发消息（Telegram）',
+                link3: '📕 获取电子书：成为最佳水军，避免账号被封',
+                link4: '🛡️ 最佳代理服务商',
+                link5: '🧑‍💻 AdsPower 浏览器',
+                link6: '🤖 Reddit 策略 GPT（独家训练）',
+                contact: '联系与支持',
+            },
+            ru: {
+                title: 'RedditTraffic.XYZ Ссылки',
+                link1: '🔥 Доступ к платформе трафика',
+                link2: '💬 Написать нам в Telegram',
+                link3: '📕 Получить книгу: Как стать лучшим шиллером и не терять аккаунты',
+                link4: '🛡️ Лучший прокси-провайдер',
+                link5: '🧑‍💻 Браузер AdsPower',
+                link6: '🤖 Reddit Strategy GPT (Спец. обучение)',
+                contact: 'Контакты и поддержка',
+            },
+            vi: {
+                title: 'RedditTraffic.XYZ Liên kết',
+                link1: '🔥 Truy cập Nền tảng Traffic',
+                link2: '💬 Nhắn tin cho chúng tôi trên Telegram',
+                link3: '📕 Nhận Ebook: Trở thành Shill đỉnh & Giữ tài khoản an toàn',
+                link4: '🛡️ Nhà cung cấp Proxy tốt nhất',
+                link5: '🧑‍💻 Trình duyệt AdsPower',
+                link6: '🤖 Reddit Strategy GPT (Huấn luyện riêng)',
+                contact: 'Liên hệ & Hỗ trợ',
+            },
+            th: {
+                title: 'RedditTraffic.XYZ ลิงก์',
+                link1: '🔥 เข้าถึงแพลตฟอร์มทราฟฟิก',
+                link2: '💬 ส่งข้อความหาเราทาง Telegram',
+                link3: '📕 รับ Ebook: เป็น Shill ขั้นเทพ & ไม่โดนแบนบัญชี',
+                link4: '🛡️ ผู้ให้บริการ Proxy ที่ดีที่สุด',
+                link5: '🧑‍💻 เบราว์เซอร์ AdsPower',
+                link6: '🤖 Reddit Strategy GPT (ฝึกเฉพาะทาง)',
+                contact: 'ติดต่อ & ซัพพอร์ต',
+            },
+            es: {
+                title: 'RedditTraffic.XYZ Enlaces',
+                link1: '🔥 Acceder a la Plataforma de Tráfico',
+                link2: '💬 Envíanos un mensaje en Telegram',
+                link3: '📕 Consigue el Ebook: Sé el mejor Shill y no pierdas cuentas',
+                link4: '🛡️ Mejor proveedor de proxy',
+                link5: '🧑‍💻 Navegador AdsPower',
+                link6: '🤖 Reddit Strategy GPT (Entrenado)',
+                contact: 'Contacto y Soporte',
+            },
+            ar: {
+                title: 'روابط RedditTraffic.XYZ',
+                link1: '🔥 الوصول إلى منصة الترافيك',
+                link2: '💬 أرسل لنا رسالة على تيليجرام',
+                link3: '📕 احصل على الكتاب الإلكتروني: كن أفضل شيل ولا تخسر الحسابات',
+                link4: '🛡️ أفضل مزود بروكسي',
+                link5: '🧑‍💻 متصفح AdsPower',
+                link6: '🤖 Reddit Strategy GPT (مخصص)',
+                contact: 'الدعم والتواصل',
+            },
+            fa: {
+                title: 'لینک‌های RedditTraffic.XYZ',
+                link1: '🔥 دسترسی به پلتفرم ترافیک',
+                link2: '💬 ارسال پیام در تلگرام',
+                link3: '📕 دریافت کتاب الکترونیکی: بهترین شیل باش و اکانت از دست نده',
+                link4: '🛡️ بهترین ارائه‌دهنده پراکسی',
+                link5: '🧑‍💻 مرورگر AdsPower',
+                link6: '🤖 Reddit Strategy GPT (سفارشی)',
+                contact: 'تماس و پشتیبانی',
+            },
+            tr: {
+                title: 'RedditTraffic.XYZ Bağlantılar',
+                link1: '🔥 Trafik Platformuna Erişim',
+                link2: "💬 Telegram'da bize mesaj gönderin",
+                link3: '📕 E-Kitabı Al: En İyi Shill Ol & Hesap Kaybetmeyi Durdur',
+                link4: '🛡️ En İyi Proxy Sağlayıcı',
+                link5: '🧑‍💻 AdsPower Tarayıcı',
+                link6: '🤖 Reddit Strategy GPT (Özel Eğitilmiş)',
+                contact: 'İletişim & Destek',
+            },
+            fr: {
+                title: 'Liens RedditTraffic.XYZ',
+                link1: '🔥 Accéder à la plateforme de trafic',
+                link2: '💬 Envoyez-nous un message sur Telegram',
+                link3: "📕 Obtenez l'Ebook : Soyez le meilleur Shill & ne perdez plus de comptes",
+                link4: '🛡️ Meilleur fournisseur de proxy',
+                link5: '🧑‍💻 Navigateur AdsPower',
+                link6: '🤖 Reddit Strategy GPT (Entraîné)',
+                contact: 'Contact & Support',
+            }
+        };
+        const btns = document.querySelectorAll('.lang-btn');
+        btns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                btns.forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                const lang = btn.getAttribute('data-lang');
+                document.getElementById('main-title').textContent = translations[lang].title;
+                document.getElementById('link1').textContent = translations[lang].link1;
+                document.getElementById('link2').textContent = translations[lang].link2;
+                document.getElementById('link3').textContent = translations[lang].link3;
+                document.getElementById('link4').textContent = translations[lang].link4;
+                document.getElementById('link5').textContent = translations[lang].link5;
+                document.getElementById('link6').textContent = translations[lang].link6;
+                document.getElementById('contact-header').textContent = translations[lang].contact;
+            });
+        });
+    </script>
+</body>
+</html> 

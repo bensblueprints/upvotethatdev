@@ -1,0 +1,35 @@
+[build]
+  # Directory to publish (dist folder after build)
+  publish = "dist"
+  
+  # Build command
+  command = "npm run build"
+
+# SPA routing - redirect all routes to index.html for client-side routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Environment variables for build
+[build.environment]
+  NODE_VERSION = "18"
+
+# Headers for security and performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Cache static assets
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Scheduled function configuration (correct syntax)
+[functions."scheduled-status-check"]
+schedule = "0 */4 * * *"  # Every 4 hours 

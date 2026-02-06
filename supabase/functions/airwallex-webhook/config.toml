@@ -1,0 +1,3 @@
+# Disable JWT verification for webhook - Airwallex sends webhooks without auth
+verify_jwt = false
+

@@ -1,0 +1,24 @@
+name: Scheduled Order Status Check
+
+on:
+  schedule:
+    # Run every 4 hours
+    - cron: '0 */4 * * *'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  check-order-status:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Call Netlify Function
+        run: |
+          curl -X POST "https://your-netlify-site.netlify.app/.netlify/functions/scheduled-status-check" \
+            -H "Content-Type: application/json" \
+            -d '{}' \
+            --fail \
+            --silent \
+            --show-error
+        env:
+          # Add any required environment variables here if needed
+          NODE_ENV: production 

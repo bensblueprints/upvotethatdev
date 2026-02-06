@@ -1,0 +1,141 @@
+# Manage API keys
+
+Airwallex uses your API keys to authenticate API requests.  Your API key and Client ID are used to obtain an access token, which authorizes access to Airwallex APIs.
+
+The Airwallex API suite includes both organization-level and account-level API resources. You can generate API keys for accessing API resources at the organization-level, account-level, or both. For information on organization and accounts, see [Global Entity Management](https://help.airwallex.com/hc/en-gb/articles/10490274623375-Global-Entity-Management-Overview).
+
+There are two main types of API keys: **admin API keys** and **scoped API keys** (previously called restricted API keys).
+
+Learn how to create and manage your admin and scoped API keys using the Developer app in the Airwallex web app.
+
+> **\[CRITICAL]**
+>
+> Developer app access requires Owner, Admin, or Developer user roles.
+
+## Admin API keys
+
+Admin API keys are issued to an organization or an account, providing access to all Airwallex APIs in the associated organization or account.  An admin key issued to an organization cannot access resources at the account level, and an account admin key cannot be used across multiple accounts.
+
+### Generate admin API key for the first time
+
+Follow these steps to create an admin API key for your Airwallex organization or account.
+
+1. Log in to the [Airwallex web app](https://airwallex.com/app/) and select **Settings** > **Developer** > **API keys**.
+2. Click **Generate** next to the organization or account to create an admin key for that organization or account.
+3. Enter your login password when prompted.
+4. Copy the generated API key and store it securely in a password manager or secret store. You will not be able to view this key again in the web app.
+
+![Create admin API keys](https://www.airwallex.com/docs/assets/developer-tools/create-admin-api-key.png)
+
+### Regenerate admin API key
+
+If you lose your API key or suspect it has been compromised, you must regenerate your API key as you cannot recover it from the Airwallex web app. Regenerating your API key will overwrite your old key, and you will no longer be able to use the old key to connect to Airwallex APIs. Your Client ID will remain unchanged.
+
+Follow these steps to regenerate your admin API key:
+
+1. Log in to the [Airwallex web app](https://airwallex.com/app/) and select **Settings** > **Developer** > **API keys**.
+2. Click the three dots (…) next to your admin API key, and choose **Regenerate**.
+3. Enter your login password.
+4. Copy the new API key and store it securely, as you will not be able to view it again in the web app.
+
+![Regenerate admin API key](https://www.airwallex.com/docs/assets/developer-tools/regenerate-admin-key.png)
+
+## Scoped API keys
+
+Scoped API keys (previously called restricted API keys) provide secure, limited access to specific Airwallex APIs for an organization and/or account(s). You can specify which Airwallex APIs each scoped API key can access, including the permitted action (**Read** or **Write**) for each resource. By using scoped API keys, you can minimize risk when developing or operating microservices. For example, you might use scoped API keys to connect only with Online Payments shopping platform plugins.
+
+Scopes correspond to resource names in Airwallex APIs. Scopes with **Read** permissions allow access to `GET` endpoints, while **Write** permissions allow access to both `GET` and `POST` endpoints. Scoped API keys are available for select APIs only; if you require access to all APIs, use the admin API key instead.
+
+### Create a scoped API key
+
+Follow these steps to create scoped API keys:
+
+1. Log in to the [Airwallex web app](https://airwallex.com/app/) and select **Settings** > **Developer** > **API keys**.
+2. Click **New scoped API key**.
+3. Enter a name for the scoped key in the **API key name** field.
+4. Configure the desired scope for this API key based on the type of access you need:
+   - **Organization-level only**: To access organization-level resources (for example, Billing APIs), go to **Organization-level permissions** and select the API resources with **Read** and/or **Write** permissions you want to enable.
+   - **Account-level only**: To access account-level resources (for example, Payments APIs), go to **Account-level permissions** and:
+     - From the **Account(s)** dropdown, select one or more accounts or click **Select all**.
+     - In the **Resources** section, select the API resources with **Read** and/or **Write** permissions you want to enable.
+   - **Both organization and account-level**: To access both organization and account-level resources (for example, Billing and Payment APIs), configure both:
+     - Go to **Organization-level permissions** and specify the resources the API key can access at the organization level.
+     - Go to **Account-level permissions** and specify the resources the API key can access for each account.
+5. Click **Create** to generate the scoped API key.
+6. Copy the API key and store it securely, as you will not be able to view it again in the web app.
+
+![Create scoped key](https://www.airwallex.com/docs/assets/developer-tools/create-scoped-key.png)
+
+### Create an access token using a scoped API key
+
+To authenticate API requests using a scoped key, first create an access token by calling [Obtain an access token](/api#/Authentication/API_Access/_api_v1_authentication_login/post) endpoint and providing the required header fields. This returns a bearer token that allows you to access Airwallex APIs in scope for the organization or account.
+
+Header fields include:
+
+- `x-api-key`: Your scoped API key.
+- `x-client-id`: Your client ID for this key.
+- `x-login-as`: (Optional) The target account ID. See the scenarios below for when this header is required or optional.
+
+```curl
+curl --request POST
+--url 'https://api-demo.airwallex.com/api/v1/authentication/login'
+--header 'Content-Type: application/json'
+--header 'x-api-key: <your_scoped_api_key>'
+--header 'x-client-id: <your_client_id>'
+--header 'x-login-as: <your_target_account_id>'
+```
+
+**Important considerations for the `x-login-as` header**
+
+The `x-login-as` header determines which account the access token is authorized for. Use it based on your scoped API key configuration:
+
+- **Multiple accounts**: If your scoped API key is linked to multiple accounts, you **must** include the `x-login-as` header to specify which account the access token is authorized to access. If omitted, the organization ID is used by default and the token can only access organization-level APIs.
+
+- **Organization and account(s)**: If your scoped API key has access to both organization-level and account-level resources, you must include the `x-login-as` header to target a specific account. This allows the token to access both the specified account and organization-level APIs. If the `x-login-as` header is omitted, the organization ID is used by default, and the token can access only organization-level APIs.
+
+- **Single account only**: If your scoped API key is scoped to a single account without organization-level access, omit the `x-login-as` header. The account ID is used by default.
+
+### Regenerate a scoped API key
+
+Similar to the admin API key, you can regenerate scoped API keys if you've lost the API key or suspect it has been compromised.  Regenerating your scoped key will overwrite your old key, and you will no longer be able to use the old key to connect to Airwallex APIs. Your Client ID will remain unchanged.
+
+Follow these steps to regenerate your scoped API key for your Airwallex organization or account(s).
+
+1. Log in to the [Airwallex web app](https://airwallex.com/app/) and select **Settings** > **Developer** > **API keys**.
+2. Click the three dots (…) next to your scoped API key, and choose **Regenerate**.
+3. Enter your login password.
+4. Copy the new API key and store it securely, as you will not be able to view it again in the web app.
+
+In addition to regenerating a scoped key, you can perform the following actions by clicking the three dots (…) next to the scoped key. All actions require you to enter your login password.
+
+- **Duplicate API key**: Allows you to duplicate an existing scoped key to create a new one with the same scope.
+- **Edit API key**: Allows you to edit the scope of the scoped key - this will not change the API key secret.
+- **Delete API key**: Allows you to delete a scoped key.
+
+![Edit scoped API key](https://www.airwallex.com/docs/assets/developer-tools/edit-scoped-key.png)
+
+## Secure your API keys
+
+As API keys are used to authenticate and authorize actions on your Airwallex account, keeping them secure and private is crucial.
+
+We recommend implementing the following best practices when handling Airwallex API keys:
+
+- Apply the principle of least privilege when creating scoped API keys and only enable the minimal set of access required for that key's specific use case.
+- Use a password manager or privileged access management system to store, share, view and audit access to API keys.
+- Avoid sending API keys over untrusted or general-purpose communication technologies such as email, SMS and instant-messenger applications where possible.
+- If you believe an API key has been inappropriately handled or viewed, ensure the API key is regenerated. Be mindful of the impact of regenerating a API key that's already in use.
+- Avoid adding API keys directly in files of code or version control systems. You can instead use environment variables, user input or APIs for password and secret management systems to retrieve Airwallex API keys and use them in code.
+
+## Notifications
+
+You will receive email notifications for the following webhook events:
+
+- Admin API key
+  - Generate key for the first time
+  - Regenerate key
+- Restricted API key
+  - Create key
+  - Regenerate key
+  - Duplicate an existing key
+  - Edit scope of an existing key
+  - Delete a key

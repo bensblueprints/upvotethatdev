@@ -1,0 +1,70 @@
+
+Submit Comment Order Endpoint
+Submit an order to make a comment on a Reddit post or to reply to another comment.
+
+Endpoint:
+POST https://api.buyupvotes.io/comment_order/submit/
+Request Body Parameters:
+Parameter	Type	Required	Description
+link	str	yes	The Reddit post or comment URL where the comment should be posted
+content	str	yes	The content of the comment
+Links can be inserted in the following format: [link text](https://yourlink.com)
+To make a new line in the comment, include the text: [newline]
+Validations:
+link: Must be a Reddit link copied on a desktop device (no mobile links)
+content: Is required
+Example Request:
+url = 'https://api.buyupvotes.io/comment_order/submit/'
+
+headers = {
+    'Content-Type': 'application/json',
+    'X-API-Key': 'your_api_key_here'
+}
+
+data = {
+    'link': '<valid Reddit link>',
+    'content': 'The text of the comment',
+}
+
+response = requests.post(url, headers=headers, json=data)
+
+if response.status_code == 200:
+    print('Comment order submitted:', response.json())
+else:
+    print('Error:', response.json()['message'])
+Successful Response:
+{
+    "message": "Comment order submitted successfully",
+    "order_number": "1891780"
+}
+Get Comment Order Status Endpoint
+Retrieve the status of a submitted comment order.
+
+Endpoint:
+POST https://api.buyupvotes.io/comment_order/status/
+Request Body Parameters:
+Parameter	Type	Required	Description
+order_number	str	yes	The order number of the comment order
+Example Request:
+url = 'https://api.buyupvotes.io/comment_order/status/'
+
+headers = {
+    'Content-Type': 'application/json',
+    'X-API-Key': 'your_api_key_here'
+}
+
+data = {
+    'order_number': '1891783',
+}
+
+response = requests.post(url, headers=headers, json=data)
+
+if response.status_code == 200:
+    print('Comment order status:', response.json())
+else:
+    print('Error:', response.json()['message'])
+Successful Response:
+{
+    "order_number": "1891783",
+    "status": "Completed"
+}

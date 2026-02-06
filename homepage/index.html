@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RedditTraffic.XYZ - Instant Reddit Upvotes & Engagement</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Custom Colors (Modern, clean, with Reddit accents) */
+        :root {
+            --color-primary: #FF4500; /* Reddit Orange */
+            --color-secondary: #0079D3; /* Reddit Blue */
+            --color-dark-bg: #000000; /* Changed to pure black */
+            --color-light-bg: #F9FAFB; /* Very light gray for sections */
+            --color-text-dark: #374151; /* Dark text */
+            --color-text-light: #6B7280; /* Lighter text */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-light-bg);
+            color: var(--color-text-dark);
+        }
+
+        .bg-primary { background-color: var(--color-primary); }
+        .text-primary { color: var(--color-primary); }
+        .bg-secondary { background-color: var(--color-secondary); }
+        .text-secondary { color: var(--color-secondary); }
+        .bg-dark-bg { background-color: var(--color-dark-bg); }
+        .text-dark-bg { color: var(--color-dark-bg); }
+        .bg-light-bg { background-color: var(--color-light-bg); }
+        .text-light-bg { color: var(--color-light-bg); }
+
+        .btn-primary {
+            @apply bg-primary text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-opacity-90 transition duration-300 transform hover:scale-105;
+        }
+
+        .card-item {
+            @apply bg-white p-8 rounded-2xl shadow-xl flex flex-col items-center text-center transition duration-300 ease-in-out transform hover:-translate-y-2 hover:shadow-2xl;
+        }
+
+        /* Hero section background style - now a solid color */
+        .hero-video-placeholder {
+            background-color: var(--color-dark-bg); /* Solid dark background */
+        }
+
+        /* Specific styles for accordion */
+        .accordion-item input[type="checkbox"] {
+            display: none;
+        }
+
+        .accordion-item .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .accordion-item input[type="checkbox"]:checked ~ .accordion-content {
+            max-height: 200px; /* Adjust as needed */
+        }
+
+        .accordion-item input[type="checkbox"]:checked ~ label i {
+            transform: rotate(180deg);
+        }
+
+        /* Styles for pricing tiers grid - now supports 4 columns + full width for enterprise */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(1, minmax(250px, 1fr)); /* Default to single column for small screens */
+            gap: 2rem;
+        }
+
+        /* Adjust grid for medium screens (2 columns) */
+        @media (min-width: 768px) { /* md breakpoint */
+            .pricing-grid {
+                grid-template-columns: repeat(2, minmax(280px, 1fr));
+            }
+        }
+
+        /* Adjust grid for large screens (4 columns, with enterprise spanning all) */
+        @media (min-width: 1024px) { /* lg breakpoint */
+            .pricing-grid {
+                grid-template-columns: repeat(4, minmax(250px, 1fr));
+            }
+        }
+        /* Enterprise package specifically to span full width on larger screens */
+        .enterprise-package {
+            grid-column: 1 / -1; /* Spans all columns */
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="bg-dark-bg text-white p-4 shadow-lg sticky top-0 z-50">
+        <nav class="container mx-auto flex justify-between items-center py-2">
+            <div class="flex items-center space-x-3">
+                <!-- Replaced Font Awesome icon with image logo -->
+                <img src="img/ReDDIT UPVOTES.png" alt="RedditTraffic.XYZ Logo" class="h-10 w-auto rounded-full">
+            </div>
+            <div class="hidden md:flex space-x-4 items-center">
+                <a href="https://www.reddittraffic.xyz/auth" class="bg-secondary text-white py-2 px-6 rounded-full font-semibold hover:bg-opacity-90 transition duration-300 shadow-md">Upvote Panel</a>
+                <a href="#contact" class="bg-primary text-white py-2 px-6 rounded-full font-semibold hover:bg-opacity-90 transition duration-300 shadow-md">Book A Consultation</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-white focus:outline-none" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-dark-bg px-4 py-2 rounded-lg shadow-inner mt-2">
+            <a href="https://www.reddittraffic.xyz/auth" class="block bg-secondary text-white text-center py-2 px-6 rounded-full font-semibold hover:bg-opacity-90 transition duration-300 mt-4">Upvote Panel</a>
+            <a href="#contact" class="block bg-primary text-white text-center py-2 px-6 rounded-full font-semibold hover:bg-opacity-90 transition duration-300 mt-2">Book A Consultation</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-video-placeholder text-white py-24 md:py-36 flex items-center justify-center min-h-screen">
+        <div class="container mx-auto text-center px-4 max-w-4xl">
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
+                Instantly Boost Your Reddit Presence
+            </h1>
+            <p class="text-lg md:text-xl mb-10 opacity-90">
+                Get real Reddit upvotes and comments delivered fast. Elevate your posts, increase visibility, and go viral.
+            </p>
+            <a href="https://www.reddittraffic.xyz/auth" class="btn-primary text-2xl px-10 py-5">
+                View Our Services <i class="fas fa-arrow-down ml-3"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 bg-light-bg">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-5xl font-extrabold mb-12 text-dark-bg">Our Powerful Services</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Service Card: Reddit Upvotes -->
+                <div class="card-item">
+                    <i class="fas fa-arrow-alt-circle-up text-primary text-6xl mb-6"></i>
+                    <h3 class="text-2xl font-bold mb-4">Reddit Upvotes</h3>
+                    <p class="text-light-text mb-6">Increase your post's visibility and ranking instantly with high-quality upvotes from real users.</p>
+                    <a href="https://www.reddittraffic.xyz/auth" class="btn-primary text-lg">Buy Upvotes <i class="fas fa-shopping-cart ml-2"></i></a>
+                </div>
+
+                <!-- Service Card: Reddit Comments -->
+                <div class="card-item">
+                    <i class="fas fa-comments text-secondary text-6xl mb-6"></i>
+                    <h3 class="text-2xl font-bold mb-4">Reddit Comments</h3>
+                    <p class="text-light-text mb-6">Drive engaging discussions and add authenticity to your posts with genuine comments.</p>
+                    <a href="https://www.reddittraffic.xyz/auth" class="btn-primary text-lg">Buy Comments <i class="fas fa-shopping-cart ml-2"></i></a>
+                </div>
+
+                <!-- Service Card: Aged Reddit Accounts -->
+                <div class="card-item">
+                    <i class="fas fa-user-clock text-blue-600 text-6xl mb-6"></i>
+                    <h3 class="text-2xl font-bold mb-4">Aged Reddit Accounts</h3>
+                    <p class="text-light-text mb-6">Access high-karma, aged Reddit accounts for various marketing needs and community engagement.</p>
+                    <a href="https://www.reddittraffic.xyz/auth" class="btn-primary text-lg bg-blue-600 hover:bg-blue-700">Inquire Now <i class="fas fa-info-circle ml-2"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section (Example Packages for Upvotes) -->
+    <section class="py-16 bg-dark-bg text-white" id="pricing">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-5xl font-extrabold mb-12">Flexible Pricing for Upvotes</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Package 1: $10 for 100 Upvotes -->
+                <div class="bg-white text-dark-bg p-8 rounded-2xl shadow-xl flex flex-col items-center border-t-8 border-primary transition duration-300 transform hover:scale-105">
+                    <h3 class="text-2xl font-bold mb-4">$10 Package</h3>
+                    <p class="text-4xl font-extrabold mb-2">$0.10/Upvote</p>
+                    <p class="text-lg mb-6">for 100 Upvotes</p>
+                    <button onclick="window.location.href='https://www.reddittraffic.xyz/auth'" class="btn-primary w-full">Order Now</button>
+                </div>
+
+                <!-- Package 2: $25 for 275 Upvotes -->
+                <div class="bg-white text-dark-bg p-8 rounded-2xl shadow-xl flex flex-col items-center border-t-8 border-secondary transition duration-300 transform hover:scale-105">
+                    <h3 class="text-2xl font-bold mb-4">$25 Package</h3>
+                    <p class="text-4xl font-extrabold mb-2">$0.08/Upvote</p>
+                    <p class="text-lg mb-6">for 275 Upvotes</p>
+                    <button onclick="window.location.href='https://www.reddittraffic.xyz/auth'" class="btn-primary w-full">Order Now</button>
+                </div>
+
+                <!-- Package 3: $50 for 625 Upvotes (Most Popular) -->
+                <div class="bg-primary text-white p-8 rounded-2xl shadow-xl flex flex-col items-center border-b-8 border-white transition duration-300 transform hover:scale-105 relative">
+                    <span class="absolute -top-4 left-1/2 -translate-x-1/2 bg-yellow-400 text-yellow-900 text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wider">Most Popular</span>
+                    <h3 class="text-2xl font-bold mb-4">$50 Package</h3>
+                    <p class="text-4xl font-extrabold mb-2">$0.07/Upvote</p>
+                    <p class="text-lg mb-6">for 625 Upvotes</p>
+                    <button onclick="window.location.href='https://www.reddittraffic.xyz/auth'" class="btn-primary w-full bg-white text-primary hover:bg-gray-100">Order Now</button>
+                </div>
+
+                <!-- Package 4: $100 for 1333 Upvotes -->
+                <div class="bg-white text-dark-bg p-8 rounded-2xl shadow-xl flex flex-col items-center border-t-8 border-secondary transition duration-300 transform hover:scale-105">
+                    <h3 class="text-2xl font-bold mb-4">$100 Package</h3>
+                    <p class="text-4xl font-extrabold mb-2">$0.065/Upvote</p>
+                    <p class="text-lg mb-6">for 1333 Upvotes</p>
+                    <button onclick="window.location.href='https://www.reddittraffic.xyz/auth'" class="btn-primary w-full">Order Now</button>
+                </div>
+
+                <!-- Package 5: $200 for 2857 Upvotes -->
+                <div class="bg-white text-dark-bg p-8 rounded-2xl shadow-xl flex flex-col items-center border-t-8 border-primary transition duration-300 transform hover:scale-105">
+                    <h3 class="text-2xl font-bold mb-4">$200 Package</h3>
+                    <p class="text-4xl font-extrabold mb-2">$0.06/Upvote</p>
+                    <p class="text-lg mb-6">for 2857 Upvotes</p>
+                    <button onclick="window.location.href='https://www.reddittraffic.xyz/auth'" class="btn-primary w-full">Order Now</button>
+                </div>
+
+                <!-- Package 6: $500 for 8333 Upvotes -->
+                <div class="bg-white text-dark-bg p-8 rounded-2xl shadow-xl flex flex-col items-center border-t-8 border-secondary transition duration-300 transform hover:scale-105">
+                    <h3 class="text-2xl font-bold mb-4">$500 Package</h3>
+                    <p class="text-4xl font-extrabold mb-2">$0.05/Upvote</p>
+                    <p class="text-lg mb-6">for 8333 Upvotes</p>
+                    <p class="text-md font-semibold text-green-600 mt-4">Includes 30-min Reddit Consultation</p>
+                    <button onclick="window.location.href='https://www.reddittraffic.xyz/auth'" class="btn-primary w-full mt-auto">Order Now</button>
+                </div>
+
+                <!-- Package 7: $1000 for 20000 Upvotes -->
+                <div class="bg-white text-dark-bg p-8 rounded-2xl shadow-xl flex flex-col items-center border-t-8 border-primary transition duration-300 transform hover:scale-105">
+                    <h3 class="text-2xl font-bold mb-4">$1000 Package</h3>
+                    <p class="text-4xl font-extrabold mb-2">$0.04/Upvote</p>
+                    <p class="text-lg mb-6">for 20000 Upvotes</p>
+                    <p class="text-md font-semibold text-green-600 mt-4">Includes 30-min Reddit Consultation</p>
+                    <button onclick="window.location.href='https://www.reddittraffic.xyz/auth'" class="btn-primary w-full mt-auto">Order Now</button>
+                </div>
+
+                <!-- Package 8: $3000 for 75000 Upvotes -->
+                <div class="bg-white text-dark-bg p-8 rounded-2xl shadow-xl flex flex-col items-center border-t-8 border-secondary transition duration-300 transform hover:scale-105">
+                    <h3 class="text-2xl font-bold mb-4">$3000 Package</h3>
+                    <p class="text-4xl font-extrabold mb-2">$0.035/Upvote</p>
+                    <p class="text-lg mb-6">for 75000 Upvotes</p>
+                    <p class="text-md font-semibold text-green-600 mt-4">Includes 30-min Reddit Consultation</p>
+                    <button onclick="window.location.href='https://www.reddittraffic.xyz/auth'" class="btn-primary w-full mt-auto">Order Now</button>
+                </div>
+
+                <!-- New Enterprise Package -->
+                <div class="bg-secondary text-white p-8 rounded-2xl shadow-xl flex flex-col items-center border-b-8 border-white transition duration-300 transform hover:scale-105 relative enterprise-package">
+                    <h3 class="text-3xl font-bold mb-4">Enterprise Package</h3>
+                    <p class="text-5xl font-extrabold mb-2">$5000+</p>
+                    <p class="text-lg mb-6">Custom solutions for large-scale needs.</p>
+                    <p class="text-md font-semibold text-white mt-4">Includes dedicated strategy and support.</p>
+                    <a href="tg://resolve?domain=upvotethat" class="btn-primary w-full mt-auto bg-white text-secondary hover:bg-gray-100">Let's Talk <i class="fab fa-telegram-plane ml-2"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Aged Reddit Accounts Section -->
+    <section class="py-16 bg-white" id="aged-accounts">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-5xl font-extrabold mb-12 text-dark-bg">
+                🔥 Aged Reddit Accounts for Sale — Starting at Just $12
+            </h2>
+            <p class="text-lg md:text-xl mb-10 text-light-text max-w-3xl mx-auto">
+                Looking to skip the warm-up phase and hit the ground running on Reddit? We've got aged accounts ready to go — from 6 months to 15+ years old.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
+                <div class="bg-gray-100 p-8 rounded-2xl shadow-md card-item">
+                    <i class="fas fa-bolt text-primary text-5xl mb-4"></i>
+                    <h3 class="text-2xl font-bold mb-4">Instant Access – Best Price, Limited Selection</h3>
+                    <p class="text-light-text mb-6">
+                        Get aged accounts at the best possible price from our live feed. The selection rotates fast, so act quick. Just pick from the list, and we'll handle the rest.
+                    </p>
+                    <a href="https://www.reddittraffic.xyz/auth" class="btn-primary text-lg bg-primary hover:bg-opacity-90">Check Live Stock <i class="fas fa-arrow-right ml-2"></i></a>
+                </div>
+                <div class="bg-gray-100 p-8 rounded-2xl shadow-md card-item">
+                    <i class="fas fa-search text-secondary text-5xl mb-4"></i>
+                    <h3 class="text-2xl font-bold mb-4">Custom Request – Tell Us What You Want</h3>
+                    <p class="text-light-text mb-6">
+                        Need something specific? Username style, karma range, age bracket — tell us your vibe. We'll shop the underground Reddit streets for you.
+                    </p>
+                    <a href="tg://resolve?domain=upvotethat" class="btn-primary text-lg bg-secondary hover:bg-opacity-90">Make a Custom Request <i class="fab fa-telegram-plane ml-2"></i></a>
+                </div>
+            </div>
+            <div class="mt-12">
+                <h3 class="text-2xl font-bold mb-4 text-dark-bg">🧠 How to Order:</h3>
+                <p class="text-lg text-light-text mb-8">
+                    Just message us on <a href="tg://resolve?domain=upvotethat" class="text-blue-600 hover:underline font-semibold">Telegram</a>. We'll walk you through it.
+                </p>
+                <p class="text-light-text text-sm italic">
+                    💬 Trusted by hundreds of stealthy marketers, spinners, and shillers.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Buy Custom Reddit Comments Section -->
+    <section class="py-16 bg-light-bg" id="custom-comments">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-5xl font-extrabold mb-12 text-dark-bg">
+                💬 Buy Custom Reddit Comments — From Just $5
+            </h2>
+            <p class="text-lg md:text-xl mb-10 text-light-text max-w-3xl mx-auto">
+                Need comments that blend in and boost engagement? You can purchase custom Reddit comments directly from our panel.
+            </p>
+            <div class="max-w-4xl mx-auto text-left space-y-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-dark-bg">🧠 Why Go Custom?</h3>
+                    <p class="text-light-text">
+                        Generic bots are easy to spot. Our comments are handwritten, aged, and tailored to your niche or post — which gives them way more weight in Reddit's algorithm.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-dark-bg">🔒 Want aged accounts to post your comments?</h3>
+                    <p class="text-light-text">
+                        We got those too. Comments posted from aged sockpuppets = max credibility + staying power.
+                    </p>
+                </div>
+                <div class="text-center">
+                    <p class="text-xl font-bold text-primary mb-6">Pricing starts at just $5 per comment. Bulk deals available.</p>
+                    <a href="tg://resolve?domain=upvotethat" class="btn-primary text-lg bg-primary hover:bg-opacity-90">DM us on Telegram to get started <i class="fab fa-telegram-plane ml-2"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Benefits Section -->
+    <section id="benefits" class="py-16 bg-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-5xl font-extrabold mb-12 text-dark-bg">Why Choose RedditTraffic.XYZ?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-6 rounded-lg text-center">
+                    <i class="fas fa-users text-primary text-5xl mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Real & Authentic Engagement</h3>
+                    <p class="text-light-text">Our network consists of real, active Reddit users, ensuring genuine engagement that looks natural.</p>
+                </div>
+                <div class="p-6 rounded-lg text-center">
+                    <i class="fas fa-rocket text-secondary text-5xl mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Blazing Fast Delivery</h3>
+                    <p class="text-light-text">Receive your upvotes and comments swiftly, helping your posts gain traction when it matters most.</p>
+                </div>
+                <div class="p-6 rounded-lg text-center">
+                    <i class="fas fa-headset text-green-500 text-5xl mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">24/7 Customer Support</h3>
+                    <p class="text-light-text">Our dedicated support team is always available to assist you with any questions or issues.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section (Simplified) -->
+    <section id="how-it-works" class="py-16 bg-light-bg">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-5xl font-extrabold mb-12 text-dark-bg">How It Works</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+                <div class="flex flex-col items-center">
+                    <div class="bg-primary text-white rounded-full w-16 h-16 flex items-center justify-center text-3xl font-bold mb-4 shadow-lg">1</div>
+                    <h3 class="text-xl font-semibold mb-2">Select Your Service</h3>
+                    <p class="text-light-text">Choose the upvote or comment package that fits your needs from our offerings.</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="bg-secondary text-white rounded-full w-16 h-16 flex items-center justify-center text-3xl font-bold mb-4 shadow-lg">2</div>
+                    <h3 class="text-xl font-semibold mb-2">Provide Your Link</h3>
+                    <p class="text-light-text">Simply give us the URL to your Reddit post or comment you wish to boost.</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="bg-dark-bg text-white rounded-full w-16 h-16 flex items-center justify-center text-3xl font-bold mb-4 shadow-lg">3</div>
+                    <h3 class="text-xl font-semibold mb-2">Watch Your Post Rise</h3>
+                    <p class="text-light-text">See your content gain traction and rise in visibility within minutes!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-5xl font-extrabold text-center mb-12 text-dark-bg">What Our Customers Are Saying</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="bg-white p-8 rounded-2xl shadow-md">
+                    <p class="text-lg italic text-gray-700 mb-4">"Absolutely incredible! My post reached the front page in hours, something I never thought possible. RedditTraffic.XYZ is the real deal."</p>
+                    <p class="font-semibold text-primary">— Jessica L., Small Business Owner</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-md">
+                    <p class="text-lg italic text-gray-700 mb-4">"I've tried other services, but the quality of engagement here is unmatched. Real comments and a noticeable boost. Highly recommend!"</p>
+                    <p class="font-semibold text-primary">— Mark T., Digital Marketer</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-16 bg-light-bg">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-5xl font-extrabold text-center mb-12 text-dark-bg">Frequently Asked Questions</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 max-w-5xl mx-auto">
+                <!-- FAQ Item 1 -->
+                <div class="accordion-item bg-gray-100 rounded-lg shadow-sm">
+                    <input type="checkbox" id="faq-new1" class="peer">
+                    <label for="faq-new1" class="flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-dark-bg hover:bg-gray-200 transition duration-200 rounded-lg">
+                        How does RedditTraffic.XYZ ensure authentic engagement?
+                        <i class="fas fa-chevron-down transform transition-transform duration-300"></i>
+                    </label>
+                    <div class="accordion-content p-5 pt-0 text-light-text peer-checked:max-h-screen">
+                        <p class="pt-2 border-t border-gray-200">We utilize a network of real, established Reddit users to provide upvotes and comments. This ensures the engagement appears natural and organic, crucial for maintaining your post's integrity on Reddit.</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 2 -->
+                <div class="accordion-item bg-gray-100 rounded-lg shadow-sm">
+                    <input type="checkbox" id="faq-new2" class="peer">
+                    <label for="faq-new2" class="flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-dark-bg hover:bg-gray-200 transition duration-200 rounded-lg">
+                        What is your delivery timeframe?
+                        <i class="fas fa-chevron-down transform transition-transform duration-300"></i>
+                    </label>
+                    <div class="accordion-content p-5 pt-0 text-light-text peer-checked:max-h-screen">
+                        <p class="pt-2 border-t border-gray-200">Delivery typically begins within minutes of your order confirmation and is completed within a few hours, depending on the volume purchased. Our goal is to provide rapid results.</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 3 -->
+                <div class="accordion-item bg-gray-100 rounded-lg shadow-sm">
+                    <input type="checkbox" id="faq-new3" class="peer">
+                    <label for="faq-new3" class="flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-dark-bg hover:bg-gray-200 transition duration-200 rounded-lg">
+                        Can I purchase upvotes for any subreddit?
+                        <i class="fas fa-chevron-down transform transition-transform duration-300"></i>
+                    </label>
+                    <div class="accordion-content p-5 pt-0 text-light-text peer-checked:max-h-screen">
+                        <p class="pt-2 border-t border-gray-200">Yes, you can purchase upvotes for posts in any public subreddit. We recommend ensuring your content adheres to the specific subreddit's rules for optimal results.</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 4 -->
+                <div class="accordion-item bg-gray-100 rounded-lg shadow-sm">
+                    <input type="checkbox" id="faq-new4" class="peer">
+                    <label for="faq-new4" class="flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-dark-bg hover:bg-gray-200 transition duration-200 rounded-lg">
+                        Is my Reddit account safe when using your services?
+                        <i class="fas fa-chevron-down transform transition-transform duration-300"></i>
+                    </label>
+                    <div class="accordion-content p-5 pt-0 text-light-text peer-checked:max-h-screen">
+                        <p class="pt-2 border-t border-gray-200">Your account's safety is our top priority. We do not require your login credentials, only the public link to your post. Our methods are designed to be discreet and minimize any risk.</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 5 -->
+                <div class="accordion-item bg-gray-100 rounded-lg shadow-sm">
+                    <input type="checkbox" id="faq-new5" class="peer">
+                    <label for="faq-new5" class="flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-dark-bg hover:bg-gray-200 transition duration-200 rounded-lg">
+                        What types of comments can I receive?
+                        <i class="fas fa-chevron-down transform transition-transform duration-300"></i>
+                    </label>
+                    <div class="accordion-content p-5 pt-0 text-light-text peer-checked:max-h-screen">
+                        <p class="pt-2 border-t border-gray-200">For comments, you can specify themes or keywords, and our network will provide natural-sounding, relevant comments to enhance discussion and authenticity on your post.</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 6 -->
+                <div class="accordion-item bg-gray-100 rounded-lg shadow-sm">
+                    <input type="checkbox" id="faq-new6" class="peer">
+                    <label for="faq-new6" class="flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-dark-bg hover:bg-gray-200 transition duration-200 rounded-lg">
+                        Do you offer a money-back guarantee?
+                        <i class="fas fa-chevron-down transform transition-transform duration-300"></i>
+                    </label>
+                    <div class="accordion-content p-5 pt-0 text-light-text peer-checked:max-h-screen">
+                        <p class="pt-2 border-t border-gray-200">We do not offer direct refunds. However, if upvotes are not delivered as promised, the equivalent value will be credited to your wallet for future use on our services.</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 7 -->
+                <div class="accordion-item bg-gray-100 rounded-lg shadow-sm">
+                    <input type="checkbox" id="faq-new7" class="peer">
+                    <label for="faq-new7" class="flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-dark-bg hover:bg-gray-200 transition duration-200 rounded-lg">
+                        What's included in a custom strategy consultation?
+                        <i class="fas fa-chevron-down transform transition-transform duration-300"></i>
+                    </label>
+                    <div class="accordion-content p-5 pt-0 text-light-text peer-checked:max-h-screen">
+                        <p class="pt-2 border-t border-gray-200">Our consultations provide a personalized Reddit marketing strategy, including content creation tips, timing optimization, subreddit targeting, and long-term engagement tactics tailored to your objectives.</p>
+                    </div>
+                </div>
+                <!-- FAQ Item 8 -->
+                <div class="accordion-item bg-gray-100 rounded-lg shadow-sm">
+                    <input type="checkbox" id="faq-new8" class="peer">
+                    <label for="faq-new8" class="flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-dark-bg hover:bg-gray-200 transition duration-200 rounded-lg">
+                        How can I contact customer support?
+                        <i class="fas fa-chevron-down transform transition-transform duration-300"></i>
+                    </label>
+                    <div class="accordion-content p-5 pt-0 text-light-text peer-checked:max-h-screen">
+                        <p class="pt-2 border-t border-gray-200">Our customer support team is available 24/7 via email at <a href="mailto:reddittrafficxyz@gmail.com" class="text-primary hover:underline">reddittrafficxyz@gmail.com</a>, or you can reach out to @upvotethat for specific inquiries.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-primary text-white text-center">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-5xl font-extrabold mb-6">Ready to Dominate Reddit?</h2>
+            <p class="text-xl mb-10">Contact us today for a free consultation or to discuss your specific needs.</p>
+            <a href="https://www.reddittraffic.xyz/auth" class="btn-primary bg-white text-primary hover:bg-gray-100 text-xl px-10 py-4">
+                Get Started Now <i class="fas fa-paper-plane ml-2"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark-bg text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <div class="mb-4 space-x-4">
+                <a href="#" class="text-secondary hover:underline">Privacy Policy</a>
+                <a href="#" class="text-secondary hover:underline">Terms of Service</a>
+                <a href="#" class="text-secondary hover:underline">Refund Policy</a>
+            </div>
+            <p class="text-light-text">&copy; 2025 RedditTraffic.XYZ. All rights reserved. Not affiliated with Reddit Inc.</p>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for mobile menu toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // JavaScript for FAQ accordion icon rotation
+        document.querySelectorAll('.accordion-item label').forEach(label => {
+            label.addEventListener('click', () => {
+                const checkbox = label.previousElementSibling;
+                const icon = label.querySelector('i');
+                if (checkbox && icon) {
+                    icon.classList.toggle('rotate-180', !checkbox.checked);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
