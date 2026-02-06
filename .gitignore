@@ -32,4 +32,4 @@ dist-ssr
 *.sln
 *.sw?
 *.md
-*.sql
+*.sqlsupabase/supabase
